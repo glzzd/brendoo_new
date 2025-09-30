@@ -28,29 +28,44 @@ api.interceptors.request.use(
   }
 )
 
-// Response interceptor to handle errors
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      // Token expired or invalid
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
-      // Don't use window.location.href, let the app handle routing
-      // The ProtectedRoute component will redirect to login
-    }
-    return Promise.reject(error)
-  }
-)
+// Response interceptor will be set up inside AuthProvider
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+  // Function to clear auth state
+  const clearAuthState = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    setUser(null)
+    setIsAuthenticated(false)
+  }
+
+  // Set up response interceptor to handle 401 errors
+  useEffect(() => {
+    const responseInterceptor = api.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401) {
+          // Token expired or invalid
+          console.log('401 error detected, clearing auth state')
+          clearAuthState()
+        }
+        return Promise.reject(error)
+      }
+    )
+
+    // Cleanup interceptor on unmount
+    return () => {
+      api.interceptors.response.eject(responseInterceptor)
+    }
+  }, [])
+
   // Check if user is authenticated on app load
   useEffect(() => {
-    const checkAuth = () => {
+    const checkAuth = async () => {
       const token = localStorage.getItem('token')
       const userData = localStorage.getItem('user')
       
@@ -61,14 +76,24 @@ export const AuthProvider = ({ children }) => {
         try {
           const parsedUser = JSON.parse(userData)
           console.log('Parsed user:', parsedUser)
-          setUser(parsedUser)
-          setIsAuthenticated(true)
+          
+          // Validate token with server
+          try {
+            const response = await api.get('/auth/validate')
+            if (response.data.success) {
+              setUser(parsedUser)
+              setIsAuthenticated(true)
+            } else {
+              console.log('Token validation failed, clearing auth state')
+              clearAuthState()
+            }
+          } catch (error) {
+            console.log('Token validation error, clearing auth state:', error.message)
+            clearAuthState()
+          }
         } catch (error) {
           console.error('Error parsing user data:', error)
-          localStorage.removeItem('token')
-          localStorage.removeItem('user')
-          setUser(null)
-          setIsAuthenticated(false)
+          clearAuthState()
         }
       } else {
         setUser(null)
@@ -146,13 +171,8 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      // Clear local storage
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
-      
-      // Reset state
-      setUser(null)
-      setIsAuthenticated(false)
+      // Clear auth state
+      clearAuthState()
       
       return { success: true }
     } catch (error) {
@@ -194,6 +214,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     updateProfile,
+    clearAuth: clearAuthState, // Manual auth state clearing function
     api // Export api instance for other components to use
   }
 

@@ -16,7 +16,7 @@ import {
 } from 'lucide-react'
 
 const PrivateLayout = ({ children }) => {
-  const { user, logout } = useAuth()
+  const { user, logout, clearAuth } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navigation = [
@@ -85,6 +85,18 @@ const PrivateLayout = ({ children }) => {
                     <p className="text-xs text-gray-500">{user?.email}</p>
                   </div>
                 </div>
+                <Button
+                  onClick={() => {
+                    console.log('Manually clearing auth state...')
+                    clearAuth()
+                  }}
+                  variant="ghost"
+                  size="sm"
+                  className="text-red-500 hover:text-red-700"
+                  title="Clear Auth (Debug)"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
                 <Button
                   onClick={handleLogout}
                   variant="ghost"

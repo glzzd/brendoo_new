@@ -513,10 +513,10 @@ export const getStoreEndpoints = async (req, res) => {
 
     const userId = req.user.userId || req.user.id;
 
-    // Validate store exists and user has permission
+    // Validate store exists (removed permission check as requested)
     const store = await Store.findOne({ 
-      _id: storeId, 
-      createdBy: userId 
+      _id: storeId,
+      isActive: true 
     }).select('endpoints name isActive');
 
     console.log('Found store:', store ? 'Yes' : 'No');
