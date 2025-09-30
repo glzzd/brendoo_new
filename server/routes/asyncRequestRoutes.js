@@ -156,7 +156,7 @@ router.post('/', authenticateToken, async (req, res) => {
       },
       status: 'pending',
       initiatedBy: req.user.userId,
-      webhookUrl: `${process.env.BASE_URL || 'http://localhost:5000'}/api/webhook/async-result/${requestId}`
+      webhookUrl: `${process.env.BASE_URL || 'http://69.62.114.202:5000'}/api/webhook/async-result/${requestId}`
     })
     
     await asyncRequest.save()

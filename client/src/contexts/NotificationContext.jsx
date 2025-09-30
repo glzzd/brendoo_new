@@ -88,7 +88,7 @@ export const NotificationProvider = ({ children }) => {
           return
         }
         
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/async-requests/notifications`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://69.62.114.202:5000'}/api/async-requests/notifications`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

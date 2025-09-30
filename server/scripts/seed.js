@@ -8,15 +8,15 @@ dotenv.config()
 const seedDatabase = async () => {
   try {
     // Connect to MongoDB
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/brendoo_2')
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://69.62.114.202:27017/brendoo_2')
     console.log('MongoDB bağlantısı başarılı')
 
     // Check if admin user already exists
-    const existingAdmin = await User.findOne({ email: 'admin@example.com' })
+    const existingAdmin = await User.findOne({ email: 'ilkin@brendoo.com' })
     
     if (existingAdmin) {
       console.log('Admin kullanıcısı zaten mevcut, siliniyor...')
-      await User.deleteOne({ email: 'admin@example.com' })
+      await User.deleteOne({ email: 'ilkin@brendoo.com' })
     }
 
     // Create admin user (password will be hashed by the model middleware)
@@ -24,14 +24,14 @@ const seedDatabase = async () => {
       username: 'admin',
       firstName: 'Admin',
       lastName: 'User',
-      email: 'admin@example.com',
+      email: 'ilkin@brendoo.com',
       password: 'admin123' // Raw password - will be hashed by model middleware
     })
 
     await adminUser.save()
     console.log('Admin kullanıcısı başarıyla oluşturuldu:')
     console.log('Kullanıcı adı: admin')
-    console.log('E-posta: admin@example.com')
+    console.log('E-posta: ilkin@brendoo.com')
     console.log('Şifre: admin123')
 
   } catch (error) {

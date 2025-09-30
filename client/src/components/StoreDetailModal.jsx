@@ -37,7 +37,7 @@ import {
 } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://69.62.114.202:5000'
 
 const StoreDetailModal = ({ store, isOpen, onClose, onStoreUpdated }) => {
   const [isEditing, setIsEditing] = useState(false)
@@ -137,7 +137,7 @@ const StoreDetailModal = ({ store, isOpen, onClose, onStoreUpdated }) => {
           const newToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRiZTZmNDc5NzgyODdlZDdhZjg3MDgiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5MjQ0OTczLCJleHAiOjE3NTkzMzEzNzN9.YyGhYPPia9UpccZ3u7wevXgrFH8Hl4yR8uQauC-Lyto'
           const userData = {
             _id: '68dbe6f47978287ed7af8708',
-            email: 'admin@example.com',
+            email: 'ilkin@brendoo.com',
             username: 'admin'
           }
           

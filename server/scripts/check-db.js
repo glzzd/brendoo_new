@@ -4,10 +4,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/brendoo')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://69.62.114.202:27017/brendoo')
   .then(async () => {
     console.log('MongoDB-ya qoşuldu');
-    console.log('Database URI:', process.env.MONGODB_URI || 'mongodb://localhost:27017/brendoo');
+    console.log('Database URI:', process.env.MONGODB_URI || 'mongodb://69.62.114.202:27017/brendoo');
     const users = await User.find({});
     console.log('Bütün istifadəçilər sayı:', users.length);
     users.forEach((user, index) => {

@@ -27,7 +27,7 @@ import AddStoreModal from '../components/AddStoreModal'
 import StoreDetailModal from '../components/StoreDetailModal'
 import AsyncRequestList from '../components/AsyncRequestList'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://69.62.114.202:5000'
 
 const Stores = () => {
   const { user } = useAuth()

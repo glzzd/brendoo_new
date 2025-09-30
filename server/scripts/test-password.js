@@ -7,11 +7,11 @@ dotenv.config();
 
 const testPassword = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/brendoo');
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://69.62.114.202:27017/brendoo');
     console.log('MongoDB-ya qoşuldu');
     
     // Find the admin user
-    const adminUser = await User.findOne({ email: 'admin@example.com' });
+    const adminUser = await User.findOne({ email: 'ilkin@brendoo.com' });
     if (!adminUser) {
       console.log('Admin istifadəçisi tapılmadı!');
       return;

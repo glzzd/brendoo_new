@@ -12,7 +12,7 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Stores from './pages/Stores'
 import Stock from './pages/Stock'
-import Users from './pages/Users'
+// import Users from './pages/Users'
 
 function App() {
   return (
@@ -87,13 +87,13 @@ function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="/istifadecilar" element={
+          {/* <Route path="/istifadecilar" element={
             <ProtectedRoute>
               <PrivateLayout>
                 <Users />
               </PrivateLayout>
             </ProtectedRoute>
-          } />
+          } /> */}
 
           {/* Default redirect */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />

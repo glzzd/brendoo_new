@@ -25,7 +25,7 @@ import {
 import { toast } from 'react-hot-toast'
 import { apiRetry, handleApiError, debounce } from '../utils/apiUtils'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://69.62.114.202:5000'
 
 const AsyncRequestList = ({ isOpen, onClose }) => {
   const [requests, setRequests] = useState([])
