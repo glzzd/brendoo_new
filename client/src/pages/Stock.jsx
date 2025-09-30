@@ -34,7 +34,7 @@ const Stock = () => {
     fetchStocks();
     fetchStats();
   }, [debouncedSearchTerm, filterStatus]);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://69.62.114.202:5000'
   const fetchStocks = async () => {
     try {
       setLoading(true);
@@ -51,7 +51,7 @@ const Stock = () => {
       console.log('🔍 Fetching stocks with params:', params.toString());
       console.log('🔑 Token exists:', !!token);
       
-      const response = await fetch(`/api/stock?${params}`, {
+      const response = await fetch(`${API_BASE_URL}/api/stock?${params}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
